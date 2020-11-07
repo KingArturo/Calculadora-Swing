@@ -3,6 +3,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import javax.swing.plaf.ColorUIResource;
+import javax.swing.plaf.metal.MetalLookAndFeel;
 
 import java.util.regex.Pattern;
 
@@ -80,6 +82,7 @@ public class Calculadora extends JFrame {
     public static void main(String[] args) {
         try {
            javax.swing.UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+
         }
         catch(Exception e) {
             System.out.println(e);
@@ -92,6 +95,52 @@ public class Calculadora extends JFrame {
                 System.exit(0);
             }
         });
+    }
+    
+    /**
+     *	Inicializa todos los componentes grafico de la
+     *	Aplicacion 
+     */
+    
+    public void init() {
+    	opLabel = new JLabel();
+    	opLabel.setBackground(Color.black);
+    	opLabel.setForeground(Color.white);
+    	
+        texto = "";
+        panelprincipal = new JPanel(new BorderLayout());
+        GridLayout grid = new GridLayout(5, 4);
+        JPanel panelArriba = new JPanel(new BorderLayout());
+        panelAbajo = new JPanel(grid);
+        estiloLabel();
+        panelprincipal.add(panelArriba, BorderLayout.NORTH);
+        panelprincipal.add(panelAbajo, BorderLayout.CENTER);
+        panelArriba.add(text, BorderLayout.EAST);
+        panelArriba.add(opLabel, BorderLayout.WEST);
+
+        panelAbajo.setBackground(Color.black);
+        panelAbajo.setBackground(Color.black);
+        panelArriba.setBackground(Color.black);
+        panelArriba.setBorder(new LineBorder(Color.WHITE));
+        
+        this.setTitle("Calculadora");
+        this.setSize(417, 450);
+        this.add(panelprincipal); 
+        this.setResizable(false);
+        initBotones();
+	}
+
+    /**
+     * Crea Los botones y los añade a un Array
+     */
+    public void initBotones() {
+    	String array[] = new String[] {"CE","C","()","*","1","2","3"
+    			,"-","4","5","6","+","7","8","9","/",".","0","%","="};
+    	for (int i=0; i<array.length; i++) {
+			String string = array[i];
+			botonArray[i] = new JButton(string);
+		}
+        addBotones();
     }
     
     /**
@@ -132,45 +181,7 @@ public class Calculadora extends JFrame {
     	return pulsado;
     }
     
-    public void init() {
-    	opLabel = new JLabel();
-    	opLabel.setBackground(Color.black);
-    	opLabel.setForeground(Color.white);
-    	
-        texto = "";
-        panelprincipal = new JPanel(new BorderLayout());
-        GridLayout grid = new GridLayout(5, 4);
-        JPanel panelArriba = new JPanel(new BorderLayout());
-        panelAbajo = new JPanel(grid);
-        estiloLabel();
-        panelprincipal.add(panelArriba, BorderLayout.NORTH);
-        panelprincipal.add(panelAbajo, BorderLayout.CENTER);
-        panelArriba.add(text, BorderLayout.EAST);
-        panelArriba.add(opLabel, BorderLayout.WEST);
 
-        panelAbajo.setBackground(Color.black);
-        panelAbajo.setBackground(Color.black);
-        panelArriba.setBackground(Color.black);
-        
-        this.setTitle("Calculadora Mal");
-        this.setSize(417, 450);
-        this.add(panelprincipal); 
-        this.setResizable(false);
-        initBotones();
-	}
-
-    /**
-     * Crea Los botones y los añade a un Array
-     */
-    public void initBotones() {
-    	String array[] = new String[] {"CE","C","()","*","1","2","3"
-    			,"-","4","5","6","+","7","8","9","/",".","0","%","="};
-    	for (int i=0; i<array.length; i++) {
-			String string = array[i];
-			botonArray[i] = new JButton(string);
-		}
-        addBotones();
-    }
 
     /**
      * AÃ±ade los botones numericos a un array
@@ -192,7 +203,6 @@ public class Calculadora extends JFrame {
         text = new JLabel("0");
         text.setBackground(Color.black);
         text.setForeground(Color.white);
-        text.setBorder(new LineBorder(Color.BLACK));
         text.setFont(new Font("Helvetica", Font.PLAIN, 40));
 	}
     
@@ -247,6 +257,11 @@ public class Calculadora extends JFrame {
         });
 	}
 
+    /**
+     *	Realiza la operacion pertinente con el numero que le pasas
+     *	por parametro.
+     */
+    
     public void calcular(float num) {
         if (operador.name().equals("SUMA")) {
         	resultado += num;
@@ -265,6 +280,10 @@ public class Calculadora extends JFrame {
         }
     }
 
+    /**
+     * Borrar un caracter 
+     */
+    
     public String borrarUnCaracter(String cadena) {
         String aDevolver = "";
         if (cadena.length() > 1) {
@@ -272,6 +291,11 @@ public class Calculadora extends JFrame {
         }
         return aDevolver;
     }
+    
+    /**
+     *	Devuelve true si el valor de un boton pasado por 
+     *	parametro es un numero.  
+     */
     
     public boolean esUnBotonConNumero(JButton btn) {
     	boolean esNumero = false;
