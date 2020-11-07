@@ -43,6 +43,7 @@ public class Calculadora extends JFrame {
                         texto = "0";
                         resultado = 0;
                         text.setText(texto);
+                        operacion = "";
                     } else if (btn.getLabel() == "=") {  
                     	calcular(num);
                     	isOperador(btn.getLabel());
@@ -51,6 +52,9 @@ public class Calculadora extends JFrame {
                         text.setText(string);
                     } else if(btn.getLabel() == "C") {
                         texto = borrarUnCaracter(texto);
+                        operacion = borrarUnCaracter(operacion);
+                    	Integer fl = new Integer(Math.round(num));
+                        num = Float.parseFloat(borrarUnCaracter(fl.toString()));
                         text.setText(texto);
                     } else {
                         texto += btn.getLabel();
@@ -64,7 +68,12 @@ public class Calculadora extends JFrame {
 	    				}
 	    				else {
 	    					text.setText(texto);
-	        				num = Float.parseFloat(texto);
+	    					try {
+		        				num = Float.parseFloat(texto);
+	    					}
+	    					catch(Exception e) {
+	    						
+	    					}
 	                        operacion += btn.getLabel(); 
 	    				}
 
@@ -120,8 +129,8 @@ public class Calculadora extends JFrame {
 
         panelAbajo.setBackground(Color.black);
         panelAbajo.setBackground(Color.black);
-        panelArriba.setBackground(Color.black);
-        panelArriba.setBorder(new LineBorder(Color.WHITE));
+        panelArriba.setBackground(new Color(20, 20, 20));
+        panelArriba.setBorder(new LineBorder(Color.black));
         
         this.setTitle("Calculadora");
         this.setSize(417, 450);
@@ -285,7 +294,7 @@ public class Calculadora extends JFrame {
      */
     
     public String borrarUnCaracter(String cadena) {
-        String aDevolver = "";
+        String aDevolver = "0";
         if (cadena.length() > 1) {
             aDevolver = cadena.substring(0, cadena.length() - 1);
         }
