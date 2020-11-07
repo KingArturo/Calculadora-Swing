@@ -15,6 +15,7 @@ public class Calculos {
 
     	resultado = 0;
     	operacion = "";
+    	texto = "";
     	operador = Operadores.NADA;
     }
 	
@@ -107,12 +108,35 @@ public class Calculos {
     	return esNumero;
     }
     
+    public String limpiar() {
+        texto = "0";
+        resultado = 0;
+        operacion = "";
+        return texto;
+    }
+    
+    public String borrar() {
+    	texto = borrarUnCaracter(texto);
+        operacion = borrarUnCaracter(operacion);
+    	Integer fl = new Integer(Math.round(num));
+        num = Float.parseFloat(borrarUnCaracter(fl.toString()));
+    	return texto;
+    }
+    
     public void setTexto(String tx) {
     	texto = tx;
     }
     
+    public void concatenarTexto(String tx) {
+    	texto += tx;
+    }
+    
     public void setOperacion(String tx) {
     	operacion = tx;
+    }
+    
+    public void concatenarOperacion(String tx) {
+    	operacion += tx;
     }
     
     public void setResultado(float fl) {
@@ -137,5 +161,9 @@ public class Calculos {
     
     public float getNum() {
     	return num;
+    }
+    
+    public String getOperador() {
+    	return operador.name();
     }
 }

@@ -33,6 +33,7 @@ public class Calculadora extends JFrame {
     	resultado = 0;
     	operacion = "";
     	operador = Operadores.NADA;
+    	calc = new Calculos();
 
                
         for (int i = 0; i < botonArray.length; i++) {
@@ -42,45 +43,52 @@ public class Calculadora extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
                     if (btn.getLabel() == "CE") {
-                        texto = "0";
+                        /**texto = "0";
                         resultado = 0;
                         text.setText(texto);
-                        operacion = "";
+                        operacion = "";*/
+                        text.setText(calc.limpiar());
                     } else if (btn.getLabel() == "=") {  
-                    	calcular(num);
-                    	isOperador(btn.getLabel());
-                    	Float fl = new Float(resultado);
+                    	calc.calcular(calc.getNum());
+                    	calc.isOperador(btn.getLabel());
+                    	Float fl = new Float(calc.getResultado());
                     	String string = fl.toString();
                         text.setText(string);
                     } else if(btn.getLabel() == "C") {
-                        texto = borrarUnCaracter(texto);
+                        /**texto = borrarUnCaracter(texto);
                         operacion = borrarUnCaracter(operacion);
                     	Integer fl = new Integer(Math.round(num));
-                        num = Float.parseFloat(borrarUnCaracter(fl.toString()));
-                        text.setText(texto);
+                        num = Float.parseFloat(borrarUnCaracter(fl.toString()));*/
+                        text.setText(calc.borrar());
                     } else {
-                        texto += btn.getLabel();
+                    	calc.concatenarTexto(btn.getLabel());
+                        //texto += btn.getLabel();
 
-	    				if (operadorPulsado(btn.getLabel())) {
-	    					operacion += " "+btn.getLabel()+" "; 
-	        				calcular(num);
-	                        isOperador(btn.getLabel());
+	    				if(calc.operadorPulsado(btn.getLabel())) {
+	    					calc.concatenarOperacion(btn.getLabel());
+	    					//operacion += " "+btn.getLabel()+" "; 
+	        				calc.calcular(calc.getNum());
+	                        calc.isOperador(btn.getLabel());
 	    					text.setText(btn.getLabel());
-	    	                texto = "";
+	    					calc.setTexto("");
+	    	                //texto = "";
 	    				}
 	    				else {
-	    					text.setText(texto);
+	    					text.setText(calc.getTexto());
+	    					//text.setText(texto);
 	    					try {
-		        				num = Float.parseFloat(texto);
+	    						calc.setNum(Float.parseFloat(calc.getTexto()));
+		        				//num = Float.parseFloat(texto);
 	    					}
 	    					catch(Exception e) {
 	    						
 	    					}
-	                        operacion += btn.getLabel(); 
+	    					calc.concatenarOperacion(btn.getLabel());
+	                        //operacion += btn.getLabel(); 
 	    				}
 
                     }
-                	opLabel.setText(operacion+" =");
+                	opLabel.setText(calc.getOperacion()+" =");
                 }
             });
             botonHover(btn);
