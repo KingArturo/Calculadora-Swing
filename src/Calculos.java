@@ -1,31 +1,30 @@
-import javax.swing.JButton;
-
 public class Calculos {
 	
     private String texto;
     private String operacion;
     
     private float resultado;
-    private float num = 0;
+    private float num;
+    private float resulAnt;
     
-    private static enum Operadores {SUMA, RESTA, DIVISION, MULTI, NADA, OTRO};
+    private static enum Operadores {SUMA, RESTA, DIVISION, MULTI, PORCENT, NADA};
     private Operadores operador;
     
     public Calculos() {
-
+    	num = 0;
     	resultado = 0;
     	operacion = "";
     	texto = "";
+    	resulAnt = 0;
     	operador = Operadores.NADA;
     }
 	
     /**
      * Comprueva si el boton pulsado es un operador
-     */
-    
+     */    
     public boolean operadorPulsado(String tx) {
     	boolean pulsado = false;
-    	String[] array = new String[] {"+","-","*","/","="};
+    	String[] array = new String[] {"+","-","*","/","=","%"};
     	for (int i=0; i < array.length; i++) {
 			String string = array[i];
 			if(string.equals(tx)) {
@@ -39,21 +38,18 @@ public class Calculos {
      *	Realiza la operacion pertinente con el numero que le pasas
      *	por parametro.
      */
-    
     public void calcular() {
         if (operador.name().equals("SUMA")) {
         	resultado += num;
-        }
-        else if (operador.name().equals("RESTA")) {
+        } else if (operador.name().equals("RESTA")) {
         	resultado -= num;
-        }
-        else if (operador.name().equals("DIVISION")) {
+        } else if (operador.name().equals("DIVISION")) {
         	resultado /= num;
-        }
-        else if (operador.name().equals("MULTI")) {
+        } else if (operador.name().equals("MULTI")) {
         	resultado *= num;
-        }
-        else {
+        } else if (operador.name().equals("PORCENT")) {
+        	resultado = (resultado/100)*num;
+        } else {
         	resultado = num;
         }
     }
@@ -76,6 +72,9 @@ public class Calculos {
 		case "/":
 			operador = Operadores.DIVISION;
 			break;
+		case "%":
+			operador = Operadores.PORCENT;
+			break;
 		case "=":
 			operador = Operadores.NADA;
 			break;
@@ -85,9 +84,8 @@ public class Calculos {
 	}
 
     /**
-     * Borrar un caracter 
-     */
-    
+     * Borra un caracter 
+     */    
     public String borrarUnCaracter(String cadena) {
         String aDevolver = "0";
         if (cadena.length() > 1) {
@@ -96,11 +94,11 @@ public class Calculos {
         return aDevolver;
     }
         
-    public String limpiar() {
+    public void limpiar() {
         texto = "0";
+        resulAnt = resultado;
         resultado = 0;
         operacion = "";
-        return texto;
     }
     
     /**
@@ -116,47 +114,40 @@ public class Calculos {
     	return texto;
     }
     
-    public void setTexto(String tx) {
-    	texto = tx;
+    public void numAnterior() {
+    	num = resulAnt;
+    	operacion = ""+resulAnt;
     }
     
-    public void concatenarTexto(String tx) {
-    	texto += tx;
-    }
+    /**
+     * Metodos Setter 
+     */    
+    public void setTexto(String tx) {texto = tx;}
     
-    public void setOperacion(String tx) {
-    	operacion = tx;
-    }
+    public void concatenarTexto(String tx) {texto += tx;}
     
-    public void concatenarOperacion(String tx) {
-    	operacion += tx;
-    }
+    public void setOperacion(String tx) {operacion = tx;}
     
-    public void setResultado(float fl) {
-    	resultado = fl;
-    }
+    public void concatenarOperacion(String tx) {operacion += tx;}
     
-    public void setNum() {
-    	num = Float.parseFloat(texto);
-    }
+    public void setResultado(float fl) {resultado = fl;}
     
-    public String getTexto() {
-    	return texto;
-    }
+    public void setNum() {num = Float.parseFloat(texto);}
     
-    public String getOperacion() {
-    	return operacion;
-    }
+    public void setResulAnt() {resulAnt = resultado;}
+   
+    /**
+     * Metodos Getter 
+     */
+    public String getTexto() {return texto;}
     
-    public float getResultado() {
-    	return resultado;
-    }
+    public String getOperacion() {return operacion;}
     
-    public float getNum() {
-    	return num;
-    }
+    public float getResultado() {return resultado;}
     
-    public String getOperador() {
-    	return operador.name();
-    }
+    public float getNum() {return num;}
+    
+    public String getOperador() {return operador.name();}
+    
+    public float getNumAnt() {return resulAnt;}
 }

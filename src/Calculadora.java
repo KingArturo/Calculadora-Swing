@@ -1,4 +1,3 @@
-
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -50,7 +49,6 @@ public class Calculadora extends JFrame {
      *	Inicializa todos los componentes grafico de la
      *	Aplicacion 
      */
-    
     public void init() {
     	opLabel = new JLabel();
     	opLabel.setBackground(Color.black);
@@ -82,7 +80,7 @@ public class Calculadora extends JFrame {
      * Crea Los botones y los añade a un Array
      */
     public void initBotones() {
-    	String array[] = new String[] {"CE","C","()","*","1","2","3"
+    	String array[] = new String[] {"CE","C","ANT","*","1","2","3"
     			,"-","4","5","6","+","7","8","9","/",".","0","%","="};
     	for (int i=0; i<array.length; i++) {
 			String string = array[i];
@@ -117,8 +115,7 @@ public class Calculadora extends JFrame {
 
     /**
      * Establece el estilo del label
-     */
-    
+     */    
     public void estiloLabel() {
         text = new JLabel("0");
         text.setBackground(Color.black);
@@ -128,8 +125,7 @@ public class Calculadora extends JFrame {
     
     /**
      *	Establece el estilo de los botones 
-     */
-    
+     */    
     public JButton estiloBotones(JButton btn) {
     	if(btn.getLabel().equals("=")) {
         	btn.setBackground(new Color(0, 14, 46));
@@ -150,8 +146,7 @@ public class Calculadora extends JFrame {
     /**
      * Establece el estilo de los botones cuando pasas el raton por
      * encima
-     */
-    
+     */    
     public void botonHover(JButton btn) {
         btn.addMouseListener(new MouseAdapter() {
             @Override
@@ -179,8 +174,7 @@ public class Calculadora extends JFrame {
     /**
      *	Devuelve true si el valor de un boton pasado por 
      *	parametro es un numero.  
-     */
-    
+     */    
     public boolean esUnBotonConNumero(JButton btn) {
     	boolean esNumero = false;
     	String array[] = new String[] {"1","2","3","4","5","6","7","8","9","0"};   	
@@ -200,15 +194,18 @@ public class Calculadora extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
                     if (btn.getLabel() == "CE") {
-                        text.setText(calc.limpiar());
+                    	calc.limpiar();
+                        text.setText(calc.getTexto());
                     } else if (btn.getLabel() == "=") {  
                     	calc.calcular();
-                    	calc.isOperador(btn.getLabel());
                     	Float fl = new Float(calc.getResultado());
                     	String string = fl.toString();
                         text.setText(string);
+                        calc.limpiar();
                     } else if(btn.getLabel() == "C") {
                         text.setText(calc.borrar());
+                    } else if(btn.getLabel().equals("ANT")) {
+                    	calc.numAnterior();
                     } else {
                     	calc.concatenarTexto(btn.getLabel());
 	    				if(calc.operadorPulsado(btn.getLabel())) {
