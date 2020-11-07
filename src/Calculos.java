@@ -19,6 +19,10 @@ public class Calculos {
     	operador = Operadores.NADA;
     }
 	
+    /**
+     * Comprueva si el boton pulsado es un operador
+     */
+    
     public boolean operadorPulsado(String tx) {
     	boolean pulsado = false;
     	String[] array = new String[] {"+","-","*","/","="};
@@ -36,7 +40,7 @@ public class Calculos {
      *	por parametro.
      */
     
-    public void calcular(float num) {
+    public void calcular() {
         if (operador.name().equals("SUMA")) {
         	resultado += num;
         }
@@ -91,29 +95,18 @@ public class Calculos {
         }
         return aDevolver;
     }
-    
-    /**
-     *	Devuelve true si el valor de un boton pasado por 
-     *	parametro es un numero.  
-     */
-    
-    public boolean esUnBotonConNumero(JButton btn) {
-    	boolean esNumero = false;
-    	String array[] = new String[] {"1","2","3","4","5","6","7","8","9","0"};   	
-    	for(int i=0; i<array.length; i++) {
-    		if(array[i].equals(btn.getLabel())) {
-    			esNumero = true;
-    		}
-    	} 
-    	return esNumero;
-    }
-    
+        
     public String limpiar() {
         texto = "0";
         resultado = 0;
         operacion = "";
         return texto;
     }
+    
+    /**
+     * Borra un caracter de la variable text, operacion y num
+     * y devuelve la variable texto
+     */
     
     public String borrar() {
     	texto = borrarUnCaracter(texto);
@@ -143,8 +136,8 @@ public class Calculos {
     	resultado = fl;
     }
     
-    public void setNum(float fl) {
-    	num = fl;
+    public void setNum() {
+    	num = Float.parseFloat(texto);
     }
     
     public String getTexto() {

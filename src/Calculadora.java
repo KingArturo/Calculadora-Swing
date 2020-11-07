@@ -17,82 +17,12 @@ public class Calculadora extends JFrame {
     private static final JButton botonArray[] = new JButton[20];
     private static final Color color = new Color(32, 32, 32);
     
-    private String texto;
-    private String operacion;
-    
-    private float resultado;
-    private float num = 0;
-    
-    private static enum Operadores {SUMA, RESTA, DIVISION, MULTI, NADA, OTRO};
-    private Operadores operador;
-    
     private Calculos calc;
 
     public Calculadora() {
     	init();
-    	resultado = 0;
-    	operacion = "";
-    	operador = Operadores.NADA;
     	calc = new Calculos();
-
-               
-        for (int i = 0; i < botonArray.length; i++) {
-            JButton btn = botonArray[i];
- 
-            btn.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent ae) {
-                    if (btn.getLabel() == "CE") {
-                        /**texto = "0";
-                        resultado = 0;
-                        text.setText(texto);
-                        operacion = "";*/
-                        text.setText(calc.limpiar());
-                    } else if (btn.getLabel() == "=") {  
-                    	calc.calcular(calc.getNum());
-                    	calc.isOperador(btn.getLabel());
-                    	Float fl = new Float(calc.getResultado());
-                    	String string = fl.toString();
-                        text.setText(string);
-                    } else if(btn.getLabel() == "C") {
-                        /**texto = borrarUnCaracter(texto);
-                        operacion = borrarUnCaracter(operacion);
-                    	Integer fl = new Integer(Math.round(num));
-                        num = Float.parseFloat(borrarUnCaracter(fl.toString()));*/
-                        text.setText(calc.borrar());
-                    } else {
-                    	calc.concatenarTexto(btn.getLabel());
-                        //texto += btn.getLabel();
-
-	    				if(calc.operadorPulsado(btn.getLabel())) {
-	    					calc.concatenarOperacion(btn.getLabel());
-	    					//operacion += " "+btn.getLabel()+" "; 
-	        				calc.calcular(calc.getNum());
-	                        calc.isOperador(btn.getLabel());
-	    					text.setText(btn.getLabel());
-	    					calc.setTexto("");
-	    	                //texto = "";
-	    				}
-	    				else {
-	    					text.setText(calc.getTexto());
-	    					//text.setText(texto);
-	    					try {
-	    						calc.setNum(Float.parseFloat(calc.getTexto()));
-		        				//num = Float.parseFloat(texto);
-	    					}
-	    					catch(Exception e) {
-	    						
-	    					}
-	    					calc.concatenarOperacion(btn.getLabel());
-	                        //operacion += btn.getLabel(); 
-	    				}
-
-                    }
-                	opLabel.setText(calc.getOperacion()+" =");
-                }
-            });
-            botonHover(btn);
-        }
+    	botonPulsado();
     }
 
     /**
@@ -126,7 +56,6 @@ public class Calculadora extends JFrame {
     	opLabel.setBackground(Color.black);
     	opLabel.setForeground(Color.white);
 
-    	texto = "";
         panelprincipal = new JPanel(new BorderLayout());
         GridLayout grid = new GridLayout(5, 4);
         JPanel panelArriba = new JPanel(new BorderLayout());
@@ -174,8 +103,6 @@ public class Calculadora extends JFrame {
     	return pulsado;
     }
     
-
-
     /**
      * Añade los botones numericos a un array
      */
@@ -217,7 +144,6 @@ public class Calculadora extends JFrame {
         btn.setFont(new Font("Helvetica", Font.PLAIN, 40));
     	btn.setBorder(new LineBorder(Color.BLACK));
  
-
     	return btn;
 	}
     
@@ -251,67 +177,6 @@ public class Calculadora extends JFrame {
 	}
 
     /**
-     *	Realiza la operacion pertinente con el numero que le pasas
-     *	por parametro.
-     */
-    
-    public void calcular(float num) {
-        if (operador.name().equals("SUMA")) {
-        	resultado += num;
-        }
-        else if (operador.name().equals("RESTA")) {
-        	resultado -= num;
-        }
-        else if (operador.name().equals("DIVISION")) {
-        	resultado /= num;
-        }
-        else if (operador.name().equals("MULTI")) {
-        	resultado *= num;
-        }
-        else {
-        	resultado = num;
-        }
-    }
-    
-    /**
-     * Comprueba si es un operador y le da un valor a
-     * la variable operador en caso de que lo sea
-     */
-    public void isOperador(String str) {
-		switch (str) {
-		case "+":
-			operador = Operadores.SUMA;
-			break;
-		case "-":
-			operador = Operadores.RESTA;
-			break;
-		case "*":
-			operador = Operadores.MULTI;
-			break;
-		case "/":
-			operador = Operadores.DIVISION;
-			break;
-		case "=":
-			operador = Operadores.NADA;
-			break;
-		default:
-			break;
-		}
-	}
-
-    /**
-     * Borrar un caracter 
-     */
-    
-    public String borrarUnCaracter(String cadena) {
-        String aDevolver = "0";
-        if (cadena.length() > 1) {
-            aDevolver = cadena.substring(0, cadena.length() - 1);
-        }
-        return aDevolver;
-    }
-    
-    /**
      *	Devuelve true si el valor de un boton pasado por 
      *	parametro es un numero.  
      */
@@ -325,5 +190,48 @@ public class Calculadora extends JFrame {
     		}
     	} 
     	return esNumero;
+    }
+    
+    public void botonPulsado() {
+        for (int i = 0; i < botonArray.length; i++) {
+            JButton btn = botonArray[i];
+ 
+            btn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                    if (btn.getLabel() == "CE") {
+                        text.setText(calc.limpiar());
+                    } else if (btn.getLabel() == "=") {  
+                    	calc.calcular();
+                    	calc.isOperador(btn.getLabel());
+                    	Float fl = new Float(calc.getResultado());
+                    	String string = fl.toString();
+                        text.setText(string);
+                    } else if(btn.getLabel() == "C") {
+                        text.setText(calc.borrar());
+                    } else {
+                    	calc.concatenarTexto(btn.getLabel());
+	    				if(calc.operadorPulsado(btn.getLabel())) {
+	    					calc.concatenarOperacion(btn.getLabel());
+	        				calc.calcular();
+	                        calc.isOperador(btn.getLabel());
+	    					text.setText(btn.getLabel());
+	    					calc.setTexto("");
+	    				} else {
+	    					text.setText(calc.getTexto());
+	    					try {
+	    						calc.setNum();
+	    					}
+	    					catch(Exception e) {
+	    						
+	    					}
+	    					calc.concatenarOperacion(btn.getLabel());
+	    				}
+                    }
+                	opLabel.setText(calc.getOperacion()+" =");
+                }
+            });
+            botonHover(btn);
+        }
     }
 }
