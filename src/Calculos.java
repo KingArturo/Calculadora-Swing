@@ -95,10 +95,11 @@ public class Calculos {
     }
         
     public void limpiar() {
-        texto = "0";
+        texto = "";
         resulAnt = resultado;
         resultado = 0;
         operacion = "";
+        operador = Operadores.NADA;
     }
     
     /**
