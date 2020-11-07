@@ -25,6 +25,8 @@ public class Calculadora extends JFrame {
     
     private static enum Operadores {SUMA, RESTA, DIVISION, MULTI, NADA, OTRO};
     private Operadores operador;
+    
+    private Calculos calc;
 
     public Calculadora() {
     	init();
@@ -115,8 +117,8 @@ public class Calculadora extends JFrame {
     	opLabel = new JLabel();
     	opLabel.setBackground(Color.black);
     	opLabel.setForeground(Color.white);
-    	
-        texto = "";
+
+    	texto = "";
         panelprincipal = new JPanel(new BorderLayout());
         GridLayout grid = new GridLayout(5, 4);
         JPanel panelArriba = new JPanel(new BorderLayout());
@@ -133,7 +135,7 @@ public class Calculadora extends JFrame {
         panelArriba.setBorder(new LineBorder(Color.black));
         
         this.setTitle("Calculadora");
-        this.setSize(417, 450);
+        this.setSize(416, 448);
         this.add(panelprincipal); 
         this.setResizable(false);
         initBotones();
@@ -151,33 +153,7 @@ public class Calculadora extends JFrame {
 		}
         addBotones();
     }
-    
-    /**
-     * Comprueba si es un operador y le da un valor a
-     * la variable operador en caso de que lo sea
-     */
-    public void isOperador(String str) {
-		switch (str) {
-		case "+":
-			operador = Operadores.SUMA;
-			break;
-		case "-":
-			operador = Operadores.RESTA;
-			break;
-		case "*":
-			operador = Operadores.MULTI;
-			break;
-		case "/":
-			operador = Operadores.DIVISION;
-			break;
-		case "=":
-			operador = Operadores.NADA;
-			break;
-		default:
-			break;
-		}
-	}
-    
+        
     public boolean operadorPulsado(String tx) {
     	boolean pulsado = false;
     	String[] array = new String[] {"+","-","*","/","="};
@@ -288,6 +264,32 @@ public class Calculadora extends JFrame {
         	resultado = num;
         }
     }
+    
+    /**
+     * Comprueba si es un operador y le da un valor a
+     * la variable operador en caso de que lo sea
+     */
+    public void isOperador(String str) {
+		switch (str) {
+		case "+":
+			operador = Operadores.SUMA;
+			break;
+		case "-":
+			operador = Operadores.RESTA;
+			break;
+		case "*":
+			operador = Operadores.MULTI;
+			break;
+		case "/":
+			operador = Operadores.DIVISION;
+			break;
+		case "=":
+			operador = Operadores.NADA;
+			break;
+		default:
+			break;
+		}
+	}
 
     /**
      * Borrar un caracter 
