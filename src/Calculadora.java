@@ -225,7 +225,7 @@ public class Calculadora extends JFrame {
 	    					calc.concatenarOperacion(btn.getLabel());
 	    				}
                     }
-                	opLabel.setText(calc.getOperacion()+" =");
+                	opLabel.setText(calc.getOperacion());
                 }
             });
             botonHover(btn);
