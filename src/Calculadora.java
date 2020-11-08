@@ -13,14 +13,20 @@ public class Calculadora extends JFrame {
     private JPanel panelAbajo;
     private JLabel text;
     private JLabel opLabel;
+    private JMenuBar menuBar;
+    private JMenu menu;
+    private JMenuItem itemOscuro;
+    private JMenuItem itemClaro;
     private static final JButton botonArray[] = new JButton[20];
     private static final Color color = new Color(32, 32, 32);
     
     private Calculos calc;
+    private Temas tema;
 
     public Calculadora() {
     	init();
     	calc = new Calculos();
+    	tema = new Temas();
     	botonPulsado();
     }
 
@@ -53,6 +59,14 @@ public class Calculadora extends JFrame {
     	opLabel = new JLabel();
     	opLabel.setBackground(Color.black);
     	opLabel.setForeground(Color.white);
+    	
+    	menuBar = new JMenuBar();
+    	menu = new JMenu("Temas");
+    	itemOscuro = new JMenuItem("Oscuro");
+    	itemClaro = new JMenuItem("Claro");
+    	menuBar.add(menu);
+    	menu.add(itemOscuro);
+    	menu.add(itemClaro);
 
         panelprincipal = new JPanel(new BorderLayout());
         GridLayout grid = new GridLayout(5, 4);
@@ -63,11 +77,13 @@ public class Calculadora extends JFrame {
         panelprincipal.add(panelAbajo, BorderLayout.CENTER);
         panelArriba.add(text, BorderLayout.EAST);
         panelArriba.add(opLabel, BorderLayout.WEST);
+        panelArriba.add(menuBar, BorderLayout.NORTH);
 
         panelAbajo.setBackground(Color.black);
         panelAbajo.setBackground(Color.black);
         panelArriba.setBackground(new Color(20, 20, 20));
         panelArriba.setBorder(new LineBorder(Color.black));
+    	estiloMenuBar();
         
         this.setTitle("Calculadora");
         this.setSize(416, 448);
@@ -88,18 +104,6 @@ public class Calculadora extends JFrame {
 		}
         addBotones();
     }
-        
-    public boolean operadorPulsado(String tx) {
-    	boolean pulsado = false;
-    	String[] array = new String[] {"+","-","*","/","="};
-    	for (int i=0; i < array.length; i++) {
-			String string = array[i];
-			if(string.equals(tx)) {
-				pulsado = true;
-			}
-		}
-    	return pulsado;
-    }
     
     /**
      * Añade los botones numericos a un array
@@ -108,8 +112,7 @@ public class Calculadora extends JFrame {
         for (int i = 0; i < botonArray.length; i++) {
         	JButton btnButton = botonArray[i];
         	btnButton.setPreferredSize(new Dimension(100, 40));
-        	btnButton = estiloBotones(btnButton);
-            panelAbajo.add(btnButton);
+            panelAbajo.add(estiloBotones(btnButton));
         }
     }
 
@@ -143,6 +146,30 @@ public class Calculadora extends JFrame {
     	return btn;
 	}
     
+    public void estiloMenuBar() {
+        menuBar.setBackground(new Color(10, 10, 10));
+    	menuBar.setBorderPainted(true);
+    	menuBar.setBorder(new LineBorder(Color.BLACK));
+        menu.setBackground(new Color(10, 10, 10));
+        menu.setForeground(Color.WHITE);
+        itemOscuro.setBackground(new Color(10, 10, 10));
+        itemOscuro.setForeground(Color.WHITE);
+        itemClaro.setBackground(new Color(10, 10, 10));
+        itemClaro.setForeground(Color.WHITE);
+    }
+    
+	public boolean operadorPulsado(String tx) {
+		boolean pulsado = false;
+		String[] array = new String[] {"+","-","*","/","="};
+		for (int i=0; i < array.length; i++) {
+			String string = array[i];
+			if(string.equals(tx)) {
+				pulsado = true;
+			}
+		}
+		return pulsado;
+	}
+	
     /**
      * Establece el estilo de los botones cuando pasas el raton por
      * encima
@@ -220,7 +247,7 @@ public class Calculadora extends JFrame {
 	    						calc.setNum();
 	    					}
 	    					catch(Exception e) {
-	    						
+	    						System.out.println(e);
 	    					}
 	    					calc.concatenarOperacion(btn.getLabel());
 	    				}

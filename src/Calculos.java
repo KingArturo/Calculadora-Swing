@@ -93,7 +93,11 @@ public class Calculos {
         }
         return aDevolver;
     }
-        
+    
+    /**
+     * Devualve a su valor inicial a las variables texto, resultado
+     * y operador y le da valor a la variable resulAnt 
+     */ 
     public void limpiar() {
         texto = "";
         resulAnt = resultado;
@@ -105,8 +109,7 @@ public class Calculos {
     /**
      * Borra un caracter de la variable text, operacion y num
      * y devuelve la variable texto
-     */
-    
+     */    
     public String borrar() {
     	texto = borrarUnCaracter(texto);
         operacion = borrarUnCaracter(operacion);
@@ -115,6 +118,9 @@ public class Calculos {
     	return texto;
     }
     
+    /**
+     * Le da a la variable num el resultado de la operacion anterior 
+     */
     public void numAnterior() {
     	num = resulAnt;
     	operacion = ""+resulAnt;
