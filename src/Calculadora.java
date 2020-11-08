@@ -79,9 +79,7 @@ public class Calculadora extends JFrame {
         panelArriba.add(opLabel, BorderLayout.WEST);
         panelArriba.add(menuBar, BorderLayout.NORTH);
 
-        panelAbajo.setBackground(Color.black);
-        panelAbajo.setBackground(Color.black);
-    	estiloMenuBar();
+        estiloMenuBarOscuro();
         
         this.setTitle("Calculadora");
         this.setSize(416, 448);
@@ -112,6 +110,8 @@ public class Calculadora extends JFrame {
 
     public void labelClaro() {
         panelArriba.setBackground(Colores.PANEL_ARRIBA_CLARO.getColor());
+        panelArriba.setBorder(new LineBorder(Colores.PANEL_ARRIBA_CLARO.getColor()));
+        panelAbajo.setBackground(Colores.PANEL_ARRIBA_CLARO.getColor());
         text.setForeground(Color.BLACK);
     	opLabel.setForeground(Color.BLACK);
         text.setFont(new Font("Helvetica", Font.PLAIN, 40));
@@ -120,7 +120,8 @@ public class Calculadora extends JFrame {
     /** Establece el estilo del label */    
     public void labelOscuro() {
         panelArriba.setBackground(Colores.PANEL_ARRIBA_OSCURO.getColor());
-        panelArriba.setBorder(new LineBorder(Color.black));
+        panelArriba.setBorder(new LineBorder(Colores.PANEL_ARRIBA_OSCURO.getColor()));
+        panelAbajo.setBackground(Colores.PANEL_ARRIBA_OSCURO.getColor());
     	opLabel.setForeground(Color.white);
     	text.setForeground(Color.white);
         text.setFont(new Font("Helvetica", Font.PLAIN, 40));
@@ -139,7 +140,7 @@ public class Calculadora extends JFrame {
     	btn.setForeground(Color.white);
     	btn.setBorderPainted(true);
         btn.setFont(new Font("Helvetica", Font.PLAIN, 40));
-    	btn.setBorder(new LineBorder(Color.BLACK));
+    	btn.setBorder(new LineBorder(Colores.PANEL_ARRIBA_OSCURO.getColor()));
  
     	return btn;
 	}
@@ -157,16 +158,28 @@ public class Calculadora extends JFrame {
     	btn.setForeground(Color.BLACK);
     	btn.setBorderPainted(true);
         btn.setFont(new Font("Helvetica", Font.PLAIN, 40));
-    	btn.setBorder(new LineBorder(Color.BLACK));
+    	btn.setBorder(new LineBorder(Colores.PANEL_ARRIBA_CLARO.getColor()));
  
     	return btn;
 	}
     
+    public void estiloMenuBarClaro() {
+        menuBar.setBackground(Colores.AMARILLO.getColor());
+    	menuBar.setBorderPainted(false);
+        menu.setBackground(Colores.AMARILLO.getColor());
+        menu.setForeground(Color.BLACK);
+        itemOscuro.setBackground(Colores.AMARILLO.getColor());
+        itemOscuro.setForeground(Color.BLACK);
+        itemOscuro.setBorderPainted(false);
+        itemClaro.setBackground(Colores.AMARILLO.getColor());
+        itemClaro.setForeground(Color.BLACK);
+        itemClaro.setBorderPainted(false);
+    }
+    
     /**Establece el estilo de la barra de menu y su contenido*/
-    public void estiloMenuBar() {
+    public void estiloMenuBarOscuro() {
         menuBar.setBackground(Colores.GRIS_OSCURO.getColor());
     	menuBar.setBorderPainted(false);
-    	menuBar.setBorder(new LineBorder(Color.BLACK));
         menu.setBackground(Colores.GRIS_OSCURO.getColor());
         menu.setForeground(Color.WHITE);
         itemOscuro.setBackground(Colores.GRIS_OSCURO.getColor());
@@ -293,6 +306,7 @@ public class Calculadora extends JFrame {
         		 estiloBotonesClaros(BOTONES[i]);
         	 }
         	 labelClaro();
+        	 estiloMenuBarClaro();
         	 temaOscuro = false;
          }
      });
@@ -304,6 +318,7 @@ public class Calculadora extends JFrame {
         	 }
         	 temaOscuro = true;
         	 labelOscuro();
+        	 estiloMenuBarOscuro();
          }
      });
     }

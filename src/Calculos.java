@@ -88,6 +88,8 @@ public class Calculos {
         String aDevolver = "0";
         if (cadena.length() > 1) {
             aDevolver = cadena.substring(0, cadena.length() - 1);
+        } else {
+        	limpiar();
         }
         return aDevolver;
     }

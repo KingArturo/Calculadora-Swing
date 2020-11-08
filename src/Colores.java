@@ -7,7 +7,7 @@ public enum Colores {
 	AZUL_OSCURO(new Color(0, 14, 46)),
 	AZUL_HOVER_OSCURO(new Color(32, 42, 65)),
 	PANEL_ARRIBA_CLARO(new Color(255, 252, 239)),
-	AMARILLO_CLARO(new Color(255, 247, 210)),
+	AMARILLO_CLARO(new Color(255, 243, 185)),
 	AMARILLO(new Color(255	, 217, 41)),
 	AMARILLO_HOVER(new Color(255, 226, 93)),
 	AZUL_CLARO(new Color(101, 148, 255)),
