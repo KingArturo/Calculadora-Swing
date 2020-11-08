@@ -34,26 +34,7 @@ public class Calculadora extends JFrame {
     	calc = new Calculos();
     	temaOscuro = true;
     	botonPulsado();
-    	 itemClaro.addActionListener(new ActionListener() {
-             @Override
-             public void actionPerformed(ActionEvent ae) {
-            	 for(int i=0; i<BOTONES.length; i++) {
-            		 estiloBotonesClaros(BOTONES[i]);
-            	 }
-            	 labelClaro();
-            	 temaOscuro = false;
-             }
-         });
-    	 itemOscuro.addActionListener(new ActionListener() {
-             @Override
-             public void actionPerformed(ActionEvent ae) {
-            	 for(int i=0; i<BOTONES.length; i++) {
-            		 estiloBotones(BOTONES[i]);
-            	 }
-            	 temaOscuro = true;
-            	 estiloLabel();
-             }
-         });
+    	menuPulsado();
     }
 
     /**
@@ -83,8 +64,6 @@ public class Calculadora extends JFrame {
      */
     public void init() {
     	opLabel = new JLabel();
-    	opLabel.setBackground(Color.black);
-    	opLabel.setForeground(Color.white);
     	
     	menuBar = new JMenuBar();
     	menu = new JMenu("Temas");
@@ -99,7 +78,7 @@ public class Calculadora extends JFrame {
         panelArriba = new JPanel(new BorderLayout());
         panelAbajo = new JPanel(grid);
         text = new JLabel("0");
-        estiloLabel();
+        labelOscuro();
         panelprincipal.add(panelArriba, BorderLayout.NORTH);
         panelprincipal.add(panelAbajo, BorderLayout.CENTER);
         panelArriba.add(text, BorderLayout.EAST);
@@ -133,27 +112,28 @@ public class Calculadora extends JFrame {
         for (int i = 0; i < BOTONES.length; i++) {
         	JButton btnButton = BOTONES[i];
         	btnButton.setPreferredSize(new Dimension(100, 40));
-            panelAbajo.add(estiloBotones(btnButton));
+            panelAbajo.add(estiloBotonesOscuros(btnButton));
         }
     }
 
     public void labelClaro() {
         panelArriba.setBackground(new Color(255, 252, 239));
-        //text.setBackground(AMARILLO_CLARO);
         text.setForeground(Color.BLACK);
+    	opLabel.setForeground(Color.BLACK);
         text.setFont(new Font("Helvetica", Font.PLAIN, 40));
     }
 
     /** Establece el estilo del label */    
-    public void estiloLabel() {
-        text.setForeground(Color.white);
+    public void labelOscuro() {
         panelArriba.setBackground(new Color(20, 20, 20));
         panelArriba.setBorder(new LineBorder(Color.black));
+    	opLabel.setForeground(Color.white);
+    	text.setForeground(Color.white);
         text.setFont(new Font("Helvetica", Font.PLAIN, 40));
 	}
     
     /**	Establece el estilo de los botones */    
-    public JButton estiloBotones(JButton btn) {
+    public JButton estiloBotonesOscuros(JButton btn) {
     	if(btn.getLabel().equals("=")) {
         	btn.setBackground(new Color(0, 14, 46));
     	} else if(esUnBotonConNumero(btn)) {
@@ -191,14 +171,16 @@ public class Calculadora extends JFrame {
     /**Establece el estilo de la barra de menu y su contenido*/
     public void estiloMenuBar() {
         menuBar.setBackground(GRIS_OSCURO);
-    	menuBar.setBorderPainted(true);
+    	menuBar.setBorderPainted(false);
     	menuBar.setBorder(new LineBorder(Color.BLACK));
         menu.setBackground(GRIS_OSCURO);
         menu.setForeground(Color.WHITE);
         itemOscuro.setBackground(GRIS_OSCURO);
         itemOscuro.setForeground(Color.WHITE);
+        itemOscuro.setBorderPainted(false);
         itemClaro.setBackground(GRIS_OSCURO);
         itemClaro.setForeground(Color.WHITE);
+        itemClaro.setBorderPainted(false);
     }
 	
     /**
@@ -307,5 +289,28 @@ public class Calculadora extends JFrame {
             });
             botonHover(btn);
         }
+    }
+    
+    public void menuPulsado() {
+   	 itemClaro.addActionListener(new ActionListener() {
+         @Override
+         public void actionPerformed(ActionEvent ae) {
+        	 for(int i=0; i<BOTONES.length; i++) {
+        		 estiloBotonesClaros(BOTONES[i]);
+        	 }
+        	 labelClaro();
+        	 temaOscuro = false;
+         }
+     });
+	 itemOscuro.addActionListener(new ActionListener() {
+         @Override
+         public void actionPerformed(ActionEvent ae) {
+        	 for(int i=0; i<BOTONES.length; i++) {
+        		 estiloBotonesOscuros(BOTONES[i]);
+        	 }
+        	 temaOscuro = true;
+        	 labelOscuro();
+         }
+     });
     }
 }
