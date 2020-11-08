@@ -83,9 +83,7 @@ public class Calculos {
 		}
 	}
 
-    /**
-     * Borra un caracter 
-     */    
+    /** Borra un caracter */    
     public String borrarUnCaracter(String cadena) {
         String aDevolver = "0";
         if (cadena.length() > 1) {
@@ -126,9 +124,7 @@ public class Calculos {
     	operacion = ""+resulAnt;
     }
     
-    /**
-     * Metodos Setter 
-     */    
+    /** Metodos Setter */    
     public void setTexto(String tx) {texto = tx;}
     
     public void concatenarTexto(String tx) {texto += tx;}
@@ -143,9 +139,7 @@ public class Calculos {
     
     public void setResulAnt() {resulAnt = resultado;}
    
-    /**
-     * Metodos Getter 
-     */
+    /** Metodos Getter */
     public String getTexto() {return texto;}
     
     public String getOperacion() {return operacion;}
