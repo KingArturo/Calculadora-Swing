@@ -19,14 +19,8 @@ public class Calculadora extends JFrame {
     private JMenuItem itemOscuro;
     private JMenuItem itemClaro;
     private static final JButton BOTONES[] = new JButton[20];
-    //Tema Oscuro
-    private static final Color GRIS = new Color(32, 32, 32);
-    private static final Color GRIS_OSCURO = new Color(10, 10, 10);
-    //Tema Claro
-    private static final Color AMARILLO_CLARO = new Color(255, 247, 210);
-    private static final Color AMARILLO = new Color(255	, 217, 41);
-    private boolean temaOscuro;
-    
+
+    private boolean temaOscuro;    
     private Calculos calc;
 
     public Calculadora() {
@@ -117,7 +111,7 @@ public class Calculadora extends JFrame {
     }
 
     public void labelClaro() {
-        panelArriba.setBackground(new Color(255, 252, 239));
+        panelArriba.setBackground(Colores.PANEL_ARRIBA_CLARO.getColor());
         text.setForeground(Color.BLACK);
     	opLabel.setForeground(Color.BLACK);
         text.setFont(new Font("Helvetica", Font.PLAIN, 40));
@@ -125,7 +119,7 @@ public class Calculadora extends JFrame {
 
     /** Establece el estilo del label */    
     public void labelOscuro() {
-        panelArriba.setBackground(new Color(20, 20, 20));
+        panelArriba.setBackground(Colores.PANEL_ARRIBA_OSCURO.getColor());
         panelArriba.setBorder(new LineBorder(Color.black));
     	opLabel.setForeground(Color.white);
     	text.setForeground(Color.white);
@@ -135,12 +129,12 @@ public class Calculadora extends JFrame {
     /**	Establece el estilo de los botones */    
     public JButton estiloBotonesOscuros(JButton btn) {
     	if(btn.getLabel().equals("=")) {
-        	btn.setBackground(new Color(0, 14, 46));
+        	btn.setBackground(Colores.AZUL_OSCURO.getColor());
     	} else if(esUnBotonConNumero(btn)) {
-	    	btn.setBackground(GRIS_OSCURO);
+	    	btn.setBackground(Colores.GRIS_OSCURO.getColor());
     	}
     	else {
-        	btn.setBackground(GRIS);
+        	btn.setBackground(Colores.GRIS.getColor());
     	}
     	btn.setForeground(Color.white);
     	btn.setBorderPainted(true);
@@ -153,12 +147,12 @@ public class Calculadora extends JFrame {
     /**	Establece el estilo de los botones */    
     public JButton estiloBotonesClaros(JButton btn) {
     	if(btn.getLabel().equals("=")) {
-        	btn.setBackground(new Color(101, 148, 255));
+        	btn.setBackground(Colores.AZUL_CLARO.getColor());
     	} else if(esUnBotonConNumero(btn)) {
-	    	btn.setBackground(AMARILLO);
+	    	btn.setBackground(Colores.AMARILLO.getColor());
     	}
     	else {
-        	btn.setBackground(AMARILLO_CLARO);
+        	btn.setBackground(Colores.AMARILLO_CLARO.getColor());
     	}
     	btn.setForeground(Color.BLACK);
     	btn.setBorderPainted(true);
@@ -170,15 +164,15 @@ public class Calculadora extends JFrame {
     
     /**Establece el estilo de la barra de menu y su contenido*/
     public void estiloMenuBar() {
-        menuBar.setBackground(GRIS_OSCURO);
+        menuBar.setBackground(Colores.GRIS_OSCURO.getColor());
     	menuBar.setBorderPainted(false);
     	menuBar.setBorder(new LineBorder(Color.BLACK));
-        menu.setBackground(GRIS_OSCURO);
+        menu.setBackground(Colores.GRIS_OSCURO.getColor());
         menu.setForeground(Color.WHITE);
-        itemOscuro.setBackground(GRIS_OSCURO);
+        itemOscuro.setBackground(Colores.GRIS_OSCURO.getColor());
         itemOscuro.setForeground(Color.WHITE);
         itemOscuro.setBorderPainted(false);
-        itemClaro.setBackground(GRIS_OSCURO);
+        itemClaro.setBackground(Colores.GRIS_OSCURO.getColor());
         itemClaro.setForeground(Color.WHITE);
         itemClaro.setBorderPainted(false);
     }
@@ -193,15 +187,15 @@ public class Calculadora extends JFrame {
             public void mouseEntered(MouseEvent arg0) {
             	if(temaOscuro) {
                 	if(btn.getLabel().equals("=")) {
-                    	btn.setBackground(new Color(32, 42, 65));
+                    	btn.setBackground(Colores.AZUL_HOVER_OSCURO.getColor());
                 	} else {
                     	btn.setBackground((Color.DARK_GRAY));
                 	}
             	} else {
                 	if(btn.getLabel().equals("=")) {
-                    	btn.setBackground(new Color(152, 179, 243));
+                    	btn.setBackground(Colores.AZUL_HOVER_CLARO.getColor());
                 	} else {
-                    	btn.setBackground(new Color(255, 226, 93));
+                    	btn.setBackground(Colores.AMARILLO_HOVER.getColor());
                 	}
             	}
 
@@ -210,19 +204,19 @@ public class Calculadora extends JFrame {
             public void mouseExited(MouseEvent e) {
             	if(temaOscuro) {
                 	if(btn.getLabel().equals("=")) {
-                    	btn.setBackground(new Color(0, 14, 46));
+                    	btn.setBackground(Colores.AZUL_OSCURO.getColor());
                 	} else if(esUnBotonConNumero(btn)) {
-                		btn.setBackground(GRIS_OSCURO);
+                		btn.setBackground(Colores.GRIS_OSCURO.getColor());
                 	} else {
-                		btn.setBackground(GRIS);
+                		btn.setBackground(Colores.GRIS.getColor());
                 	}
             	} else {
                 	if(btn.getLabel().equals("=")) {
-                    	btn.setBackground(new Color(101, 148, 255));
+                    	btn.setBackground(Colores.AZUL_CLARO.getColor());
                 	} else if(esUnBotonConNumero(btn)) {
-            	    	btn.setBackground(AMARILLO);
+            	    	btn.setBackground(Colores.AMARILLO.getColor());
                 	} else {
-                    	btn.setBackground(AMARILLO_CLARO);
+                    	btn.setBackground(Colores.AMARILLO_CLARO.getColor());
                 	}
             	}
 
