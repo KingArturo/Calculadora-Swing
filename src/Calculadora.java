@@ -21,12 +21,10 @@ public class Calculadora extends JFrame {
     private static final Color color = new Color(32, 32, 32);
     
     private Calculos calc;
-    private Temas tema;
 
     public Calculadora() {
     	init();
     	calc = new Calculos();
-    	tema = new Temas();
     	botonPulsado();
     }
 
