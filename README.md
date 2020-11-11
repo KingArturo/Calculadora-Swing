@@ -19,9 +19,11 @@ La calculadora puede pasa de un tema oscuro a un claro.
 ```
 ## Clases que tiene⚙️
 ### La calculadora dispone de 3 clases:
-_La clase Claculadora.java se encarga de generar la interface grafica, dar estilo a los elementos y detectar las interacciones del usuario._
-_La clase Calculos.java se encarga de realizar los calculos y detectar que tipo de calculo se tiene que realizar._
-_La clase Colores.java es una clase enum en la que se encuentran los colores de los que esta compuesta la aplicación._
+
+* **La clase Claculadora.java** se encarga de generar la interface grafica, dar estilo a los elementos y detectar las interacciones del usuario.
+* **La clase Calculos.java** se encarga de realizar los calculos y detectar que tipo de calculo se tiene que realizar.
+* **La clase Colores.java** es una clase enum en la que se encuentran los colores de los que esta compuesta la aplicación.
+
 ## Botones especiales🛠️
 Aparte de los botones comunes la calculadora dispone de tres botones con funciones especiales.
 Los botones son "CE", "C" y "ANT".
