@@ -35,15 +35,7 @@ public class Calculadora extends JFrame {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        try {
-           javax.swing.UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
-
-        }
-        catch(Exception e) {
-            System.out.println(e);
-        }
         Calculadora frame = new Calculadora();
-
         frame.setVisible(true);
         frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent we) {
@@ -90,8 +82,8 @@ public class Calculadora extends JFrame {
 
     /** Crea Los botones y los añade a un Array */
     public void initBotones() {
-    	String array[] = new String[] {"CE","C","ANT","*","1","2","3"
-    			,"-","4","5","6","+","7","8","9","/",".","0","%","="};
+    	String array[] = new String[] {"CE","C","ANT","*","7","8","9"
+    			,"-","4","5","6","+","1","2","3","/",".","0","%","="};
     	for (int i=0; i<array.length; i++) {
 			String string = array[i];
 			BOTONES[i] = new JButton(string);
